@@ -89,42 +89,45 @@
 </body>
 <!-- ================= BÖLÜM 2: HEADER / NAVBAR ================= -->
 <!-- ================= DÜZELTİLMİŞ HEADER / NAVBAR ================= -->
-  <header class="fixed top-0 left-0 w-full z-40 bg-[#070d1e]/90 backdrop-blur-md border-b border-blue-500/20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 h-20 flex items-center justify-between">
+<!-- ================= DÜZELTİLMİŞ MOBİL UYUMLU HEADER ================= -->
+  <header class="fixed top-0 left-0 w-full z-40 bg-[#070d1e]/95 backdrop-blur-md border-b border-blue-500/20">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 md:px-8 h-16 sm:h-20 flex items-center justify-between">
       
-      <!-- Sol Taraf: Doğrudan Büyütülmüş Dairesiz Logo ve Marka İsmi -->
-      <a href="#" class="flex items-center gap-3.5 group flex-shrink-0">
-        <!-- Dairesel Çerçeve Kaldırıldı, Logo Doğrudan Büyük Gösteriliyor -->
-        <div class="h-11 sm:h-13 w-auto flex items-center justify-center transition-transform group-hover:scale-105">
+      <!-- SOL TARAF: LOGO VE MARKA İSMİ -->
+      <a href="#" class="flex items-center gap-2 sm:gap-3 group flex-shrink-0">
+        <!-- Logo (Mobilde Kompakt, Masaüstünde Büyük) -->
+        <div class="h-8 sm:h-12 w-auto flex items-center justify-center flex-shrink-0">
           <img 
             src="logo.png" 
             alt="EVERMUN'26 Logo" 
-            class="h-full w-auto object-contain max-h-12"
+            class="h-full w-auto object-contain max-h-8 sm:max-h-12"
             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
           />
           <!-- Logo yoksa çıkan yedek ikon -->
-          <svg class="w-8 h-8 text-blue-400 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+          <svg class="w-6 h-6 text-blue-400 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
             <circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/>
           </svg>
         </div>
 
-        <!-- Marka Metni -->
-        <div class="flex flex-col">
-          <span class="font-serif text-lg sm:text-xl font-bold tracking-wider text-white whitespace-nowrap">
+        <!-- Marka Yazısı -->
+        <div class="flex flex-col flex-shrink-0">
+          <span class="font-serif text-sm sm:text-xl font-bold tracking-wider text-white whitespace-nowrap">
             EVERMUN<span class="text-blue-500">'26</span>
+          </span>
+          <span class="text-[8px] uppercase tracking-widest text-slate-400 font-medium -mt-0.5 hidden md:block">
+            Uşak University MUN
           </span>
         </div>
       </a>
 
-      <!-- Sağ Taraf: Navigasyon Linkleri ve Hızlı Başvuru Butonu -->
-      <div class="flex items-center gap-4 sm:gap-8">
-        <nav class="flex items-center gap-3 sm:gap-6 md:gap-8 text-[11px] sm:text-xs font-semibold tracking-widest uppercase text-slate-300">
+      <!-- SAĞ TARAF: DÜZELTİLMİŞ MOBİL LİNKLER -->
+      <div class="flex items-center gap-2.5 sm:gap-6">
+        <nav class="flex items-center gap-3 sm:gap-6 md:gap-8 text-[11px] sm:text-xs font-semibold tracking-wider uppercase text-slate-300">
           <a href="#conference" class="hover:text-blue-400 transition-colors whitespace-nowrap">Conference</a>
-          <a href="#heritage" class="hover:text-blue-400 transition-colors whitespace-nowrap">Heritage</a>
           <a href="#roles" class="hover:text-blue-400 transition-colors whitespace-nowrap">Roles</a>
-          <a href="#venue" class="hover:text-blue-400 transition-colors whitespace-nowrap">Venue</a>
         </nav>
 
+        <!-- Masaüstü Hızlı Başvuru Butonu -->
         <a href="#roles" class="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-600/20 border border-blue-500/40 text-blue-300 hover:bg-blue-600 hover:text-white text-xs font-semibold uppercase tracking-wider transition-all duration-300 shadow-md">
           <span>Apply Now</span>
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
