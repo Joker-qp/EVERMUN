@@ -378,39 +378,159 @@
   </footer>
 
 
-  <!-- ================= POP-UP BAŞVURU PENCERESİ (MODAL) ================= -->
-  <div id="applyModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
-    <div class="bright-navy-card rounded-3xl max-w-md w-full p-8 relative shadow-2xl border border-blue-500/30">
+  <!-- ================= DETAYLI POP-UP BAŞVURU PENCERESİ ================= -->
+  <div id="applyModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="bright-navy-card rounded-3xl max-w-2xl w-full p-6 sm:p-8 relative shadow-2xl border border-blue-500/30 max-h-[90vh] overflow-y-auto">
       
       <!-- Kapatma Butonu -->
       <button onclick="closeApplyModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white text-2xl transition-colors cursor-pointer">&times;</button>
       
-      <!-- Modal Başlığı -->
-      <h3 id="modalRoleTitle" class="font-serif text-2xl font-bold text-white mb-2">Apply for Role</h3>
-      <p class="text-xs text-slate-300 mb-6">Fill in your details below to complete your application.</p>
+      <!-- Modal Başlık -->
+      <h3 id="modalRoleTitle" class="font-serif text-2xl font-bold text-white mb-1">EVERMUN Delegate Application Form</h3>
+      <p class="text-xs text-blue-300 font-medium mb-6 pb-4 border-b border-blue-500/20">
+        IMPORTANT: Every delegate must complete the application form individually.
+      </p>
 
-      <!-- Başvuru Formu -->
-      <form id="applyForm" onsubmit="handleApplySubmit(event)" class="space-y-4">
+      <!-- FORM -->
+      <form id="applyForm" onsubmit="handleApplySubmit(event)" class="space-y-5">
         <input type="hidden" id="selectedRoleInput" value="" />
-        
-        <div>
-          <label class="block text-[11px] text-slate-200 font-semibold mb-1 uppercase tracking-wider">Full Name</label>
-          <input type="text" required placeholder="John Doe" class="w-full bg-[#0c1836] border border-blue-500/20 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors" />
-        </div>
-        <div>
-          <label class="block text-[11px] text-slate-200 font-semibold mb-1 uppercase tracking-wider">Email Address</label>
-          <input type="email" required placeholder="john@example.com" class="w-full bg-[#0c1836] border border-blue-500/20 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors" />
-        </div>
-        <div>
-          <label class="block text-[11px] text-slate-200 font-semibold mb-1 uppercase tracking-wider">Phone Number</label>
-          <input type="tel" required placeholder="+90 5xx xxx xx xx" class="w-full bg-[#0c1836] border border-blue-500/20 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors" />
-        </div>
-        <div>
-          <label class="block text-[11px] text-slate-200 font-semibold mb-1 uppercase tracking-wider">Institution / School</label>
-          <input type="text" required placeholder="Uşak University" class="w-full bg-[#0c1836] border border-blue-500/20 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors" />
+
+        <!-- 1. AD & SOYAD -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-[11px] text-slate-200 font-semibold mb-1 uppercase tracking-wider">First Name *</label>
+            <input type="text" id="firstName" required placeholder="First Name" class="w-full bg-[#0c1836] border border-blue-500/20 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500" />
+          </div>
+          <div>
+            <label class="block text-[11px] text-slate-200 font-semibold mb-1 uppercase tracking-wider">Last Name *</label>
+            <input type="text" id="lastName" required placeholder="Last Name" class="w-full bg-[#0c1836] border border-blue-500/20 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500" />
+          </div>
         </div>
 
-        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 rounded-xl transition-colors mt-2 shadow-lg shadow-blue-600/30 cursor-pointer">
+        <!-- 2. CİNSİYET & DOĞUM TARİHİ -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-[11px] text-slate-200 font-semibold mb-1 uppercase tracking-wider">Gender *</label>
+            <div class="flex items-center gap-6 pt-2">
+              <label class="inline-flex items-center gap-2 text-xs text-slate-200 cursor-pointer">
+                <input type="radio" name="gender" value="Male" required class="accent-blue-500" /> Male
+              </label>
+              <label class="inline-flex items-center gap-2 text-xs text-slate-200 cursor-pointer">
+                <input type="radio" name="gender" value="Female" required class="accent-blue-500" /> Female
+              </label>
+            </div>
+          </div>
+          <div>
+            <label class="block text-[11px] text-slate-200 font-semibold mb-1 uppercase tracking-wider">Date of Birth *</label>
+            <input type="date" id="dob" required class="w-full bg-[#0c1836] border border-blue-500/20 rounded-xl px-4 py-2 text-sm text-white focus:outline-none focus:border-blue-500" />
+          </div>
+        </div>
+
+        <!-- 3. ŞEHİR & OKUL -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-[11px] text-slate-200 font-semibold mb-1 uppercase tracking-wider">City *</label>
+            <input type="text" id="city" required placeholder="City" class="w-full bg-[#0c1836] border border-blue-500/20 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500" />
+          </div>
+          <div>
+            <label class="block text-[11px] text-slate-200 font-semibold mb-1 uppercase tracking-wider">School and Grade *</label>
+            <input type="text" id="schoolGrade" required placeholder="School & Grade" class="w-full bg-[#0c1836] border border-blue-500/20 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500" />
+          </div>
+        </div>
+
+        <!-- 4. TELEFON & İLETİŞİM MAİLİ -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-[11px] text-slate-200 font-semibold mb-1 uppercase tracking-wider">Phone Number *</label>
+            <input type="tel" id="phone" required placeholder="+90 5xx xxx xx xx" class="w-full bg-[#0c1836] border border-blue-500/20 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500" />
+          </div>
+          <div>
+            <label class="block text-[11px] text-slate-200 font-semibold mb-1 uppercase tracking-wider">Mail Address *</label>
+            <input type="email" id="email" required placeholder="example@gmail.com" class="w-full bg-[#0c1836] border border-blue-500/20 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500" />
+          </div>
+        </div>
+
+        <!-- 5. ÖNCEKİ DENEYİM -->
+        <div>
+          <label class="block text-[11px] text-slate-200 font-semibold mb-1 uppercase tracking-wider">Previous Experience *</label>
+          <textarea id="previousExp" required rows="2" placeholder="Example: EVERMUN'26 — UNODC — Germany — Honorable Mention" class="w-full bg-[#0c1836] border border-blue-500/20 rounded-xl px-4 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500"></textarea>
+        </div>
+
+        <!-- 6. KOMİTE SEÇİMLERİ (1, 2, 3) -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[10px] text-slate-200 font-semibold mb-1 uppercase tracking-wider">1st Committee *</label>
+            <select id="committee1" required class="w-full bg-[#0c1836] border border-blue-500/20 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500">
+              <option value="">Select...</option>
+              <option value="WHO">WHO</option>
+              <option value="UNODC">UNODC</option>
+              <option value="EUROPE UNION">EUROPE UNION</option>
+              <option value="ECOSOC">ECOSOC</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-[10px] text-slate-200 font-semibold mb-1 uppercase tracking-wider">2nd Committee *</label>
+            <select id="committee2" required class="w-full bg-[#0c1836] border border-blue-500/20 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500">
+              <option value="">Select...</option>
+              <option value="WHO">WHO</option>
+              <option value="UNODC">UNODC</option>
+              <option value="EUROPE UNION">EUROPE UNION</option>
+              <option value="ECOSOC">ECOSOC</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-[10px] text-slate-200 font-semibold mb-1 uppercase tracking-wider">3rd Committee *</label>
+            <select id="committee3" required class="w-full bg-[#0c1836] border border-blue-500/20 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500">
+              <option value="">Select...</option>
+              <option value="WHO">WHO</option>
+              <option value="UNODC">UNODC</option>
+              <option value="EUROPE UNION">EUROPE UNION</option>
+              <option value="ECOSOC">ECOSOC</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- 7. KONAKLAMA & PARTİ KATILIMI -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+          <div>
+            <label class="block text-[11px] text-slate-200 font-semibold mb-1 uppercase tracking-wider">Require accommodation? *</label>
+            <div class="flex items-center gap-6 pt-1">
+              <label class="inline-flex items-center gap-2 text-xs text-slate-200 cursor-pointer"><input type="radio" name="accommodation" value="Yes" required class="accent-blue-500" /> Yes</label>
+              <label class="inline-flex items-center gap-2 text-xs text-slate-200 cursor-pointer"><input type="radio" name="accommodation" value="No" required class="accent-blue-500" /> No</label>
+            </div>
+          </div>
+          <div>
+            <label class="block text-[11px] text-slate-200 font-semibold mb-1 uppercase tracking-wider">Attend conference party? *</label>
+            <div class="flex items-center gap-6 pt-1">
+              <label class="inline-flex items-center gap-2 text-xs text-slate-200 cursor-pointer"><input type="radio" name="party" value="Yes" required class="accent-blue-500" /> Yes</label>
+              <label class="inline-flex items-center gap-2 text-xs text-slate-200 cursor-pointer"><input type="radio" name="party" value="No" required class="accent-blue-500" /> No</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8. DİYET TERCİHİ -->
+        <div>
+          <label class="block text-[11px] text-slate-200 font-semibold mb-1 uppercase tracking-wider">Dietary preferences or restrictions? *</label>
+          <div class="flex flex-wrap items-center gap-4 pt-1">
+            <label class="inline-flex items-center gap-2 text-xs text-slate-200 cursor-pointer"><input type="radio" name="dietary" value="Vegan" required class="accent-blue-500" /> Vegan</label>
+            <label class="inline-flex items-center gap-2 text-xs text-slate-200 cursor-pointer"><input type="radio" name="dietary" value="Vegetarian" required class="accent-blue-500" /> Vegetarian</label>
+            <label class="inline-flex items-center gap-2 text-xs text-slate-200 cursor-pointer"><input type="radio" name="dietary" value="None" required class="accent-blue-500" /> None</label>
+          </div>
+        </div>
+
+        <!-- 9. SAĞLIK & ÖZEL İHTİYAÇLAR -->
+        <div>
+          <label class="block text-[11px] text-slate-200 font-semibold mb-1 uppercase tracking-wider">Health condition, allergy, or special needs? *</label>
+          <textarea id="healthNeeds" required rows="2" placeholder="Write 'None' if not applicable." class="w-full bg-[#0c1836] border border-blue-500/20 rounded-xl px-4 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500"></textarea>
+        </div>
+
+        <!-- 10. REFERANS BİLGİSİ -->
+        <div>
+          <label class="block text-[11px] text-slate-200 font-semibold mb-1 uppercase tracking-wider">Reference Information</label>
+          <input type="text" id="reference" placeholder="Reference Info (Optional)" class="w-full bg-[#0c1836] border border-blue-500/20 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500" />
+        </div>
+
+        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3.5 rounded-xl transition-colors mt-4 shadow-lg shadow-blue-600/30 cursor-pointer">
           Submit Application
         </button>
       </form>
@@ -434,9 +554,9 @@
       }, 1000);
     }
 
-    // 2. MODAL AÇMA VE KAPATMA FONKSİYONLARI
+    // 2. MODAL AÇMA/KAPATMA
     function openApplyModal(roleName) {
-      document.getElementById('modalRoleTitle').innerText = "Apply for " + roleName;
+      document.getElementById('modalRoleTitle').innerText = "EVERMUN " + roleName + " Application Form";
       document.getElementById('selectedRoleInput').value = roleName;
       document.getElementById('applyModal').classList.remove('hidden');
     }
@@ -445,25 +565,41 @@
       document.getElementById('applyModal').classList.add('hidden');
     }
 
-    // 3. GOOGLE SHEETS FORMU GÖNDERME
+    // 3. DETAYLI FORM VERİLERİNİ GOOGLE SHEETS'E GÖNDERME
     async function handleApplySubmit(e) {
       e.preventDefault();
       const form = e.target;
       const submitBtn = form.querySelector('button[type="submit"]');
 
+      const role = document.getElementById('selectedRoleInput').value;
+
+      // Tüm 17 Alanın Verilerini Alma
       const formData = {
-        role: document.getElementById('selectedRoleInput').value,
-        fullName: form.querySelectorAll('input')[1].value,
-        email: form.querySelectorAll('input')[2].value,
-        phone: form.querySelectorAll('input')[3].value,
-        institution: form.querySelectorAll('input')[4].value
+        role: role,
+        firstName: document.getElementById('firstName').value,
+        lastName: document.getElementById('lastName').value,
+        gender: form.querySelector('input[name="gender"]:checked')?.value || '',
+        dob: document.getElementById('dob').value,
+        city: document.getElementById('city').value,
+        schoolGrade: document.getElementById('schoolGrade').value,
+        phone: document.getElementById('phone').value,
+        email: document.getElementById('email').value,
+        previousExp: document.getElementById('previousExp').value,
+        committee1: document.getElementById('committee1').value,
+        committee2: document.getElementById('committee2').value,
+        committee3: document.getElementById('committee3').value,
+        accommodation: form.querySelector('input[name="accommodation"]:checked')?.value || '',
+        party: form.querySelector('input[name="party"]:checked')?.value || '',
+        dietary: form.querySelector('input[name="dietary"]:checked')?.value || '',
+        healthNeeds: document.getElementById('healthNeeds').value,
+        reference: document.getElementById('reference').value
       };
 
       submitBtn.innerText = "Submitting...";
       submitBtn.disabled = true;
 
       // Google Apps Script Web App URL Adresiniz:
-      const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyOYOzasNttQhnumZ2j2zFt62yVlWunS8-O6ipX_c1eGJfY5tMqN0L7l5UgNiJXWt1eTQ/exec";
+      const GOOGLE_SCRIPT_URL = "BURAYA_GOOGLE_APPS_SCRIPT_URL_ADRESINIZI_YAZIN";
 
       try {
         await fetch(GOOGLE_SCRIPT_URL, {
@@ -486,4 +622,3 @@
 
     document.addEventListener("DOMContentLoaded", startCountdown);
   </script>
-</html>
