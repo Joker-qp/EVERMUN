@@ -774,30 +774,37 @@
           </div>
 
           ${
-            !isAdvisor
+            isPress
               ? `
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
-            <div>
-              <label class="block text-[9px] text-slate-300 font-semibold mb-1 uppercase">1st Committee *</label>
-              <select class="m-c1 w-full bg-[#050f26] border border-blue-500/20 rounded-xl px-2.5 py-1.5 text-xs text-white" required>
-                <option value="">Select...</option><option value="WHO">WHO</option><option value="UNODC">UNODC</option><option value="EUROPE UNION">EUROPE UNION</option><option value="ECOSOC">ECOSOC</option>
-              </select>
-            </div>
-            <div>
-              <label class="block text-[9px] text-slate-300 font-semibold mb-1 uppercase">2nd Committee *</label>
-              <select class="m-c2 w-full bg-[#050f26] border border-blue-500/20 rounded-xl px-2.5 py-1.5 text-xs text-white" required>
-                <option value="">Select...</option><option value="WHO">WHO</option><option value="UNODC">UNODC</option><option value="EUROPE UNION">EUROPE UNION</option><option value="ECOSOC">ECOSOC</option>
-              </select>
-            </div>
-            <div>
-              <label class="block text-[9px] text-slate-300 font-semibold mb-1 uppercase">3rd Committee *</label>
-              <select class="m-c3 w-full bg-[#050f26] border border-blue-500/20 rounded-xl px-2.5 py-1.5 text-xs text-white" required>
-                <option value="">Select...</option><option value="WHO">WHO</option><option value="UNODC">UNODC</option><option value="EUROPE UNION">EUROPE UNION</option><option value="ECOSOC">ECOSOC</option>
-              </select>
-            </div>
-          </div>
-          `
-              : ""
+<div>
+  <label class="block text-[10px] text-slate-300 font-semibold mb-1 uppercase">Camera / Equipment Model *</label>
+  <input type="text" class="m-cameraModel w-full bg-[#050f26] border border-blue-500/20 rounded-xl px-3.5 py-2 text-xs text-white" required placeholder="e.g. Canon EOS 80D, Sony A7 III or N/A" />
+</div>
+`
+              : !isAdvisor
+                ? `
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+  <div>
+    <label class="block text-[9px] text-slate-300 font-semibold mb-1 uppercase">1st Committee *</label>
+    <select class="m-c1 w-full bg-[#050f26] border border-blue-500/20 rounded-xl px-2.5 py-1.5 text-xs text-white" required>
+      <option value="">Select...</option><option value="WHO">WHO</option><option value="UNODC">UNODC</option><option value="EUROPE UNION">EUROPE UNION</option><option value="ECOSOC">ECOSOC</option>
+    </select>
+  </div>
+  <div>
+    <label class="block text-[9px] text-slate-300 font-semibold mb-1 uppercase">2nd Committee *</label>
+    <select class="m-c2 w-full bg-[#050f26] border border-blue-500/20 rounded-xl px-2.5 py-1.5 text-xs text-white" required>
+      <option value="">Select...</option><option value="WHO">WHO</option><option value="UNODC">UNODC</option><option value="EUROPE UNION">EUROPE UNION</option><option value="ECOSOC">ECOSOC</option>
+    </select>
+  </div>
+  <div>
+    <label class="block text-[9px] text-slate-300 font-semibold mb-1 uppercase">3rd Committee *</label>
+    <select class="m-c3 w-full bg-[#050f26] border border-blue-500/20 rounded-xl px-2.5 py-1.5 text-xs text-white" required>
+      <option value="">Select...</option><option value="WHO">WHO</option><option value="UNODC">UNODC</option><option value="EUROPE UNION">EUROPE UNION</option><option value="ECOSOC">ECOSOC</option>
+    </select>
+  </div>
+</div>
+`
+                : ""
           }
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -890,13 +897,18 @@
         let hasError = false;
 
         memberCards.forEach((card, idx) => {
-          const c1 = getVal(card, ".m-c1");
-          const c2 = getVal(card, ".m-c2");
-          const c3 = getVal(card, ".m-c3");
+          const isPressMember = roleType === "Press Member";
+          const c1 = isPressMember ? "-" : getVal(card, ".m-c1");
+          const c2 = isPressMember ? "-" : getVal(card, ".m-c2");
+          const c3 = isPressMember ? "-" : getVal(card, ".m-c3");
+          const cameraModelVal = isPressMember
+            ? getVal(card, ".m-cameraModel")
+            : "-";
 
-          // Komite çakışma kontrolü (Advisor değilse)
+          // Komite çakışma kontrolü (Sadece Delegeler için geçerli)
           if (
             roleType !== "Advisor Teacher" &&
+            !isPressMember &&
             c1 !== "-" &&
             c2 !== "-" &&
             c3 !== "-"
@@ -920,7 +932,7 @@
             phone: getVal(card, ".m-phone"),
             email: getVal(card, ".m-email"),
             previousExp: getVal(card, ".m-previousExp"),
-            committee1: c1,
+            committee1: isPressMember ? cameraModelVal : c1,
             committee2: c2,
             committee3: c3,
             accommodation: getRadioVal(card, "accommodation", "No"),
@@ -943,7 +955,7 @@
         submitBtn.disabled = true;
 
         const GOOGLE_SCRIPT_URL =
-          "https://script.google.com/macros/s/AKfycby_9ZKNx6VF_s0YNu5Ac4G01qifB1pNQKszNC48kUDCPLdVt715wLuJImNIRnByyxFl_A/exec";
+          "https://script.google.com/macros/s/AKfycbx0raV08N_hIeUy1Au8L72sDeBs6Fg6xiRHtatIoRW4SSMLW13m1FxElA0zBcoeVg5YFQ/exec";
 
         try {
           await fetch(GOOGLE_SCRIPT_URL, {
