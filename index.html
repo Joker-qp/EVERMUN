@@ -1,624 +1,981 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="dark scroll-smooth">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>EVERMUN'26 — Model United Nations Conference</title>
-   <!-- 1. Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- 2. Google Fonts: Cinzel (Klasik Cumhuriyet/Devlet Temalı Serif) & Plus Jakarta Sans -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EVERMUN'26 — Model United Nations Conference</title>
 
-  <!-- 3. Renk Paleti Tanımları (Daha Açık ve Canlı Lacivert Tonları) -->
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: {
-            serif: ['"Cinzel"', 'serif'],
-            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+    <!-- 1. Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- 2. Google Fonts: Cinzel & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- 3. Renk Paleti Tanımları -->
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            fontFamily: {
+              serif: ['"Cinzel"', "serif"],
+              sans: ['"Plus Jakarta Sans"', "sans-serif"],
+            },
+            colors: {
+              navy: {
+                950: "#070d1e",
+                900: "#0c1836",
+                800: "#122452",
+                700: "#1b357a",
+                600: "#2563eb",
+                500: "#3b82f6",
+              },
+            },
           },
-          colors: {
-            navy: {
-              950: '#070d1e', // Arka plan (Eskisi gibi kapkara değil, tatlı koyu lacivert)
-              900: '#0c1836', // Kart arka planları
-              800: '#122452', // Hover durumları
-              700: '#1b357a', // Çerçeveler
-              600: '#2563eb', // Canlı Mavi Vurgu
-              500: '#3b82f6', // Parlak Mavi
-            }
-          }
-        }
+        },
+      };
+    </script>
+
+    <!-- 4. Özel Cam (Glassmorphism) Efektleri ve Arka Plan -->
+    <style>
+      body {
+        background-color: #070d1e;
+        color: #f8fafc;
+        font-family: "Plus Jakarta Sans", sans-serif;
       }
-    }
-  </script>
 
-  <!-- 4. Özel Atatürk Fotoğraf Çerçeveleri ve Cam (Glassmorphism) Efektleri -->
-  <style>
-    body {
-      background-color: #070d1e;
-      color: #f8fafc;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-    }
+      /* Arka Planda Dumanlı Diplomasi Teması */
+      .hero-republic-bg {
+        background:
+          linear-gradient(
+            to bottom,
+            rgba(7, 13, 30, 0.75),
+            rgba(7, 13, 30, 0.98)
+          ),
+          url("bg.png"); /* 'bg.png' resminiz arkada hafif saydam görünür */
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+      }
 
-    /* Arka Planda Dumanlı Atatürk & Diplomasi Teması */
-    .hero-republic-bg {
-      background: 
-        linear-gradient(to bottom, rgba(7, 13, 30, 0.75), rgba(7, 13, 30, 0.98)),
-        url('bg.png'); /* 'bg.jpg' resminiz arkada hafif saydam görünür */
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-    }
+      .bright-navy-card {
+        background: rgba(12, 24, 54, 0.75);
+        backdrop-filter: blur(16px);
+        border: 1px solid rgba(59, 130, 246, 0.2);
+        box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+      }
 
-    /* Kartlar için Şık Açık Lacivert Cam Efekti */
-    .bright-navy-card {
-      background: rgba(12, 24, 54, 0.75);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(59, 130, 246, 0.2);
-      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
-    }
+      .bright-navy-card:hover {
+        border-color: rgba(59, 130, 246, 0.5);
+        box-shadow: 0 15px 35px -10px rgba(37, 99, 235, 0.3);
+      }
+    </style>
+  </head>
+  <body
+    class="min-h-screen bg-[#070d1e] text-slate-100 antialiased selection:bg-blue-600 selection:text-white"
+  >
+    <!-- ================= BÖLÜM 2: HEADER / NAVBAR ================= -->
+    <header
+      class="fixed top-0 left-0 w-full z-40 bg-[#070d1e]/95 backdrop-blur-md border-b border-blue-500/20"
+    >
+      <div
+        class="max-w-7xl mx-auto px-3 sm:px-6 md:px-8 h-16 sm:h-20 flex items-center justify-between"
+      >
+        <a
+          href="#"
+          class="flex items-center gap-2 sm:gap-3 group flex-shrink-0"
+        >
+          <div
+            class="h-8 sm:h-12 w-auto flex items-center justify-center flex-shrink-0"
+          >
+            <img
+              src="logo.png"
+              alt="EVERMUN'26 Logo"
+              class="h-full w-auto object-contain max-h-8 sm:max-h-12"
+              onerror="
+                this.style.display = 'none';
+                this.nextElementSibling.style.display = 'block';
+              "
+            />
+            <svg
+              class="w-6 h-6 text-blue-400 hidden"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.75"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+              <path d="M2 12h20" />
+            </svg>
+          </div>
 
-    .bright-navy-card:hover {
-      border-color: rgba(59, 130, 246, 0.5);
-      box-shadow: 0 15px 35px -10px rgba(37, 99, 235, 0.3);
-    }
+          <div class="flex flex-col flex-shrink-0">
+            <span
+              class="font-serif text-sm sm:text-xl font-bold tracking-wider text-white whitespace-nowrap"
+            >
+              EVERMUN<span class="text-blue-500">'26</span>
+            </span>
+          </div>
+        </a>
 
-    /* Atatürk ve Cumhuriyet Fotoğrafları İçin Özel Altın/Mavi Parlak Çerçeve */
-    .ataturk-frame {
-      border: 2px solid rgba(59, 130, 246, 0.3);
-      box-shadow: 0 0 25px rgba(37, 99, 235, 0.25);
-      transition: all 0.4s ease;
-    }
+        <div class="flex items-center gap-2.5 sm:gap-6">
+          <nav
+            class="flex items-center gap-3 sm:gap-6 md:gap-8 text-[11px] sm:text-xs font-semibold tracking-wider uppercase text-slate-300"
+          >
+            <a
+              href="#conference"
+              class="hover:text-blue-400 transition-colors whitespace-nowrap"
+              >Conference</a
+            >
+            <a
+              href="#roles"
+              class="hover:text-blue-400 transition-colors whitespace-nowrap"
+              >Roles</a
+            >
+          </nav>
 
-    .ataturk-frame:hover {
-      border-color: rgba(59, 130, 246, 0.8);
-      box-shadow: 0 0 35px rgba(59, 130, 246, 0.45);
-      transform: scale(1.02);
-    }
-  </style>
-</head>
-<body class="min-h-screen bg-[#070d1e] text-slate-100 antialiased selection:bg-blue-600 selection:text-white">
+          <a
+            href="#roles"
+            class="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-600/20 border border-blue-500/40 text-blue-300 hover:bg-blue-600 hover:text-white text-xs font-semibold uppercase tracking-wider transition-all duration-300 shadow-md"
+          >
+            <span>Apply Now</span>
+            <svg
+              class="w-3.5 h-3.5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M14 5l7 7m0 0l-7 7m7-7H3"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
 
-  <!-- BÖLÜM 2'DE BURAYA ÜST MENÜ (NAVBAR) GELECEK -->
+    <!-- ================= BÖLÜM 3: HERO / WELCOME SECTION ================= -->
+    <section
+      id="conference"
+      class="relative min-h-screen pt-36 pb-20 flex items-center justify-center hero-republic-bg text-center px-4 sm:px-6 overflow-hidden"
+    >
+      <div
+        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-600/15 rounded-full blur-[140px] pointer-events-none"
+      ></div>
 
-</body>
-<!-- ================= BÖLÜM 2: HEADER / NAVBAR ================= -->
-<!-- ================= DÜZELTİLMİŞ HEADER / NAVBAR ================= -->
-<!-- ================= DÜZELTİLMİŞ MOBİL UYUMLU HEADER ================= -->
-  <header class="fixed top-0 left-0 w-full z-40 bg-[#070d1e]/95 backdrop-blur-md border-b border-blue-500/20">
-    <div class="max-w-7xl mx-auto px-3 sm:px-6 md:px-8 h-16 sm:h-20 flex items-center justify-between">
-      
-      <!-- SOL TARAF: LOGO VE MARKA İSMİ -->
-      <a href="#" class="flex items-center gap-2 sm:gap-3 group flex-shrink-0">
-        <!-- Logo (Mobilde Kompakt, Masaüstünde Büyük) -->
-        <div class="h-8 sm:h-12 w-auto flex items-center justify-center flex-shrink-0">
-          <img 
-            src="logo.png" 
-            alt="EVERMUN'26 Logo" 
-            class="h-full w-auto object-contain max-h-8 sm:max-h-12"
-            onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+      <div class="max-w-4xl mx-auto flex flex-col items-center relative z-10">
+        <div class="relative mb-6 flex items-center justify-center">
+          <img
+            src="logo.png"
+            alt="EVERMUN'26 Main Emblem"
+            class="w-48 sm:w-60 md:w-72 h-auto object-contain drop-shadow-[0_0_25px_rgba(59,130,246,0.5)] transition-transform hover:scale-105"
+            onerror="
+              this.style.display = 'none';
+              this.nextElementSibling.style.display = 'block';
+            "
           />
-          <!-- Logo yoksa çıkan yedek ikon -->
-          <svg class="w-6 h-6 text-blue-400 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
-            <circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/>
+          <svg
+            class="w-24 h-24 text-blue-400 hidden"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+            <path d="M2 12h20" />
           </svg>
         </div>
 
-        <!-- Marka Yazısı -->
-        <div class="flex flex-col flex-shrink-0">
-          <span class="font-serif text-sm sm:text-xl font-bold tracking-wider text-white whitespace-nowrap">
-            EVERMUN<span class="text-blue-500">'26</span>
-          </span>
-          <span class="text-[8px] uppercase tracking-widest text-slate-400 font-medium -mt-0.5 hidden md:block">
-            Uşak University MUN
-          </span>
-        </div>
-      </a>
-
-      <!-- SAĞ TARAF: DÜZELTİLMİŞ MOBİL LİNKLER -->
-      <div class="flex items-center gap-2.5 sm:gap-6">
-        <nav class="flex items-center gap-3 sm:gap-6 md:gap-8 text-[11px] sm:text-xs font-semibold tracking-wider uppercase text-slate-300">
-          <a href="#conference" class="hover:text-blue-400 transition-colors whitespace-nowrap">Conference</a>
-          <a href="#roles" class="hover:text-blue-400 transition-colors whitespace-nowrap">Roles</a>
-        </nav>
-
-        <!-- Masaüstü Hızlı Başvuru Butonu -->
-        <a href="#roles" class="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-600/20 border border-blue-500/40 text-blue-300 hover:bg-blue-600 hover:text-white text-xs font-semibold uppercase tracking-wider transition-all duration-300 shadow-md">
-          <span>Apply Now</span>
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-        </a>
-      </div>
-
-    </div>
-  </header>
-  <!-- ================= BÖLÜM 3: HERO / WELCOME SECTION ================= -->
-  <!-- ================= DÜZELTİLMİŞ HERO SECTION ================= -->
-  <section id="conference" class="relative min-h-screen pt-36 pb-20 flex items-center justify-center hero-republic-bg text-center px-4 sm:px-6 overflow-hidden">
-    
-    <!-- Arka Plandaki Mavi Işık Halesi -->
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-600/15 rounded-full blur-[140px] pointer-events-none"></div>
-
-    <div class="max-w-4xl mx-auto flex flex-col items-center relative z-10">
-      
-      <!-- Dairesel Çerçeve Kaldırıldı: Doğrudan BÜYÜK AMBLEM LOGO -->
-      <div class="relative mb-6 flex items-center justify-center">
-        <img 
-          src="logo.png" 
-          alt="EVERMUN'26 Main Emblem" 
-          class="w-48 sm:w-60 md:w-72 h-auto object-contain drop-shadow-[0_0_25px_rgba(59,130,246,0.5)] transition-transform hover:scale-105"
-          onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
-        />
-        <!-- Logo yoksa çıkan yedek ikon -->
-        <svg class="w-24 h-24 text-blue-400 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/>
-        </svg>
-      </div>
-
-
-      <!-- BÜYÜTÜLMÜŞ "WELCOME TO" VE ANA BAŞLIK -->
-      <h2 class="text-sm sm:text-base md:text-lg uppercase tracking-[0.4em] font-bold text-slate-200 mb-3 drop-shadow">
-        WELCOME TO
-      </h2>
-      <h1 class="font-serif text-5xl sm:text-7xl md:text-8xl font-bold tracking-tight text-white mb-6 drop-shadow-lg">
-        EVERMUN<span class="text-blue-500">'26</span>
-      </h1>
-
-      <!-- Alt Başlık Metni -->
-      <p class="text-slate-200 text-sm sm:text-base md:text-lg max-w-2xl leading-relaxed mb-8 font-light italic">
-        Are you looking for the best MUN in Uşak? We're right here. Get ready for a diplomatic experience
-      </p>
-
-      <!-- Tarih ve Konum Bilgisi -->
-      <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-xs font-medium text-slate-200 mb-10 bg-navy-900/90 border border-blue-500/30 px-6 py-3 rounded-2xl backdrop-blur-md shadow-xl">
-        <div class="flex items-center gap-2">
-          <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-          <span>2 - 3 - 4 OCTOBER 2026</span>
-        </div>
-        <span class="text-slate-500">|</span>
-        <div class="flex items-center gap-2">
-          <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-          <span>UŞAK UNIVERSITY CAMPUS</span>
-        </div>
-      </div>
-
-      <!-- Canlı Geri Sayım Sayaç Kutuları -->
-      <div class="flex items-center justify-center gap-3 sm:gap-5">
-        <div class="w-20 sm:w-24 h-20 sm:h-24 rounded-2xl bright-navy-card flex flex-col items-center justify-center shadow-2xl">
-          <span id="days" class="text-2xl sm:text-4xl font-bold font-serif text-white">00</span>
-          <span class="text-[10px] uppercase tracking-widest text-blue-400 font-semibold mt-1">DAYS</span>
-        </div>
-        <div class="w-20 sm:w-24 h-20 sm:h-24 rounded-2xl bright-navy-card flex flex-col items-center justify-center shadow-2xl">
-          <span id="hours" class="text-2xl sm:text-4xl font-bold font-serif text-white">00</span>
-          <span class="text-[10px] uppercase tracking-widest text-blue-400 font-semibold mt-1">HOURS</span>
-        </div>
-        <div class="w-20 sm:w-24 h-20 sm:h-24 rounded-2xl bright-navy-card flex flex-col items-center justify-center shadow-2xl">
-          <span id="minutes" class="text-2xl sm:text-4xl font-bold font-serif text-white">00</span>
-          <span class="text-[10px] uppercase tracking-widest text-blue-400 font-semibold mt-1">MINS</span>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- ================= BÖLÜM 4: ROLES SECTION ================= -->
-  <!-- ================= BÖLÜM 4: ROLES SECTION (GÖRSEL ALANLI) ================= -->
-<!-- ================= BÖLÜM 4: ROLES SECTION (TÜM KART ARKA PLAN GÖRSELLİ) ================= -->
-  <!-- ================= BÖLÜM 4: ROLES SECTION (İKONSUZ & TEMİZ ARKA PLANLI) ================= -->
-  <section id="roles" class="py-24 relative bg-[#070d1e] border-t border-blue-500/10">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
-      
-      <!-- Bölüm Başlığı & Alt Açıklama -->
-      <div class="text-center mb-16">
-        <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl text-white font-bold tracking-tight">
-          Choose Your Role
+        <h2
+          class="text-sm sm:text-base md:text-lg uppercase tracking-[0.4em] font-bold text-slate-200 mb-3 drop-shadow"
+        >
+          WELCOME TO
         </h2>
-        <p class="text-slate-300 text-xs sm:text-sm max-w-md mx-auto mt-3 leading-relaxed">
-          Select a category that best fits your goals and begin your application process today.
+        <h1
+          class="font-serif text-5xl sm:text-7xl md:text-8xl font-bold tracking-tight text-white mb-6 drop-shadow-lg"
+        >
+          EVERMUN<span class="text-blue-500">'26</span>
+        </h1>
+
+        <p
+          class="text-slate-200 text-sm sm:text-base md:text-lg max-w-2xl leading-relaxed mb-8 font-light italic"
+        >
+          Are you looking for the best MUN in Uşak? We're right here. Get ready
+          for a diplomatic experience
+        </p>
+
+        <div
+          class="flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-xs font-medium text-slate-200 mb-10 bg-navy-900/90 border border-blue-500/30 px-6 py-3 rounded-2xl backdrop-blur-md shadow-xl"
+        >
+          <div class="flex items-center gap-2">
+            <svg
+              class="w-4 h-4 text-blue-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+              />
+            </svg>
+            <span>2 - 3 - 4 OCTOBER 2026</span>
+          </div>
+          <span class="text-slate-500">|</span>
+          <div class="flex items-center gap-2">
+            <svg
+              class="w-4 h-4 text-blue-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+              />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+              />
+            </svg>
+            <span>UŞAK UNIVERSITY CAMPUS</span>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-center gap-3 sm:gap-5">
+          <div
+            class="w-20 sm:w-24 h-20 sm:h-24 rounded-2xl bright-navy-card flex flex-col items-center justify-center shadow-2xl"
+          >
+            <span
+              id="days"
+              class="text-2xl sm:text-4xl font-bold font-serif text-white"
+              >00</span
+            >
+            <span
+              class="text-[10px] uppercase tracking-widest text-blue-400 font-semibold mt-1"
+              >DAYS</span
+            >
+          </div>
+          <div
+            class="w-20 sm:w-24 h-20 sm:h-24 rounded-2xl bright-navy-card flex flex-col items-center justify-center shadow-2xl"
+          >
+            <span
+              id="hours"
+              class="text-2xl sm:text-4xl font-bold font-serif text-white"
+              >00</span
+            >
+            <span
+              class="text-[10px] uppercase tracking-widest text-blue-400 font-semibold mt-1"
+              >HOURS</span
+            >
+          </div>
+          <div
+            class="w-20 sm:w-24 h-20 sm:h-24 rounded-2xl bright-navy-card flex flex-col items-center justify-center shadow-2xl"
+          >
+            <span
+              id="minutes"
+              class="text-2xl sm:text-4xl font-bold font-serif text-white"
+              >00</span
+            >
+            <span
+              class="text-[10px] uppercase tracking-widest text-blue-400 font-semibold mt-1"
+              >MINS</span
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= BÖLÜM 4: ROLES SECTION ================= -->
+    <section id="roles" class="py-20 relative bg-[#070d1e]">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
+        <div class="text-center mb-16">
+          <h2
+            class="font-serif text-3xl sm:text-4xl md:text-5xl text-white font-bold tracking-tight"
+          >
+            Choose Your Role
+          </h2>
+          <p
+            class="text-slate-300 text-xs sm:text-sm max-w-md mx-auto mt-3 leading-relaxed"
+          >
+            Select a category that best fits your goals and begin your
+            application process today.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- 1. KART: Delegation -->
+          <div
+            class="relative min-h-[380px] rounded-2xl p-7 flex flex-col justify-between overflow-hidden border border-blue-500/30 shadow-2xl transition-all duration-300 hover:-translate-y-2 hover:border-blue-500/60 group"
+          >
+            <img
+              src="delegation.jpeg"
+              alt="Delegation Background"
+              class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              onerror="this.style.display = 'none'"
+            />
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-[#070d1e] via-[#070d1e]/85 to-[#070d1e]/40 group-hover:via-[#070d1e]/75 transition-colors"
+            ></div>
+
+            <div class="relative z-10 flex justify-end items-start">
+              <span
+                class="px-3 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase bg-emerald-950/90 border border-emerald-500/50 text-emerald-400 shadow-md backdrop-blur-md"
+              >
+                OPEN
+              </span>
+            </div>
+
+            <div class="relative z-10 mt-12">
+              <h3
+                class="font-serif text-2xl text-white font-bold mb-2 drop-shadow"
+              >
+                Delegation
+              </h3>
+              <p
+                class="text-slate-300 text-xs leading-relaxed mb-6 drop-shadow"
+              >
+                Delegation refers to a group application format. It allows
+                participants to apply and take part in the event together as a
+                team.
+              </p>
+              <button
+                onclick="openApplyModal('Delegation')"
+                class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-blue-400 hover:text-blue-300 transition-colors cursor-pointer group-hover:translate-x-1 duration-300"
+              >
+                <span>APPLY NOW</span>
+                <span>&rarr;</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2. KART: Delegate -->
+          <div
+            class="relative min-h-[380px] rounded-2xl p-7 flex flex-col justify-between overflow-hidden border border-blue-500/30 shadow-2xl transition-all duration-300 hover:-translate-y-2 hover:border-blue-500/60 group"
+          >
+            <img
+              src="delegate.png"
+              alt="Delegate Background"
+              class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              onerror="this.style.display = 'none'"
+            />
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-[#070d1e] via-[#070d1e]/85 to-[#070d1e]/40 group-hover:via-[#070d1e]/75 transition-colors"
+            ></div>
+
+            <div class="relative z-10 flex justify-end items-start">
+              <span
+                class="px-3 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase bg-emerald-950/90 border border-emerald-500/50 text-emerald-400 shadow-md backdrop-blur-md"
+              >
+                OPEN
+              </span>
+            </div>
+
+            <div class="relative z-10 mt-12">
+              <h3
+                class="font-serif text-2xl text-white font-bold mb-2 drop-shadow"
+              >
+                Delegate
+              </h3>
+              <p
+                class="text-slate-300 text-xs leading-relaxed mb-6 drop-shadow"
+              >
+                Delegates represent their allocations and actively engage in
+                debates. They present ideas and collaborate to develop effective
+                solutions to given problems.
+              </p>
+              <button
+                onclick="openApplyModal('Delegate')"
+                class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-blue-400 hover:text-blue-300 transition-colors cursor-pointer group-hover:translate-x-1 duration-300"
+              >
+                <span>APPLY NOW</span>
+                <span>&rarr;</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 3. KART: Press Member -->
+          <div
+            class="relative min-h-[380px] rounded-2xl p-7 flex flex-col justify-between overflow-hidden border border-blue-500/30 shadow-2xl transition-all duration-300 hover:-translate-y-2 hover:border-blue-500/60 group"
+          >
+            <img
+              src="press.png"
+              alt="Press Member Background"
+              class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              onerror="this.style.display = 'none'"
+            />
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-[#070d1e] via-[#070d1e]/85 to-[#070d1e]/40 group-hover:via-[#070d1e]/75 transition-colors"
+            ></div>
+
+            <div class="relative z-10 flex justify-end items-start">
+              <span
+                class="px-3 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase bg-emerald-950/90 border border-emerald-500/50 text-emerald-400 shadow-md backdrop-blur-md"
+              >
+                OPEN
+              </span>
+            </div>
+
+            <div class="relative z-10 mt-12">
+              <h3
+                class="font-serif text-2xl text-white font-bold mb-2 drop-shadow"
+              >
+                Press Member
+              </h3>
+              <p
+                class="text-slate-300 text-xs leading-relaxed mb-6 drop-shadow"
+              >
+                The press team captures the most memorable moments of the event
+                through photography, journalism, and social media coverage.
+              </p>
+              <button
+                onclick="openApplyModal('Press Member')"
+                class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-blue-400 hover:text-blue-300 transition-colors cursor-pointer group-hover:translate-x-1 duration-300"
+              >
+                <span>APPLY NOW</span>
+                <span>&rarr;</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= BÖLÜM 5: FOOTER ================= -->
+    <footer
+      class="py-14 border-t border-blue-500/20 text-center relative bg-[#070d1e]"
+    >
+      <div class="max-w-4xl mx-auto px-6 flex flex-col items-center">
+        <div class="h-12 w-auto mb-4 flex items-center justify-center">
+          <img
+            src="logo.png"
+            alt="EVERMUN'26 Footer Logo"
+            class="h-full w-auto object-contain max-h-12"
+            onerror="
+              this.style.display = 'none';
+              this.nextElementSibling.style.display = 'block';
+            "
+          />
+          <svg
+            class="w-8 h-8 text-blue-400 hidden"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.75"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+            <path d="M2 12h20" />
+          </svg>
+        </div>
+
+        <h3 class="font-serif text-xl text-white font-bold tracking-wide mb-1">
+          EVERMUN<span class="text-blue-500">'26</span> — Model United Nations
+        </h3>
+        <p class="text-xs text-slate-300 mb-4">
+          Uşak's Premier Model United Nations Conference
+        </p>
+
+        <p class="text-xs text-slate-400 mb-2">
+          © 2026 <span class="font-medium text-slate-200">EVERMUN'26</span>. All
+          rights reserved.
+        </p>
+
+        <p class="text-xs text-slate-300">
+          Contact us:
+          <a
+            href="mailto:evermun26@gmail.com"
+            class="text-blue-400 hover:underline font-semibold"
+          >
+            evermun26@gmail.com
+          </a>
         </p>
       </div>
+    </footer>
 
-      <!-- Rol Kartları Grid Düzeni -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-
-        <!-- 1. KART: Delegation -->
-        <div class="relative min-h-[380px] rounded-2xl p-7 flex flex-col justify-between overflow-hidden border border-blue-500/30 shadow-2xl transition-all duration-300 hover:-translate-y-2 hover:border-blue-500/60 group">
-          
-          <!-- TÜM KARTIN ARKA PLAN FOTOĞRAFI ('delegation.jpg') -->
-          <img 
-            src="delegation.jpeg" 
-            alt="Delegation Background" 
-            class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-            onerror="this.style.display='none';"
-          />
-          <!-- Metinlerin Mükemmel Okunması İçin Karartma Filtresi Katmanı -->
-          <div class="absolute inset-0 bg-gradient-to-t from-[#070d1e] via-[#070d1e]/85 to-[#070d1e]/40 group-hover:via-[#070d1e]/75 transition-colors"></div>
-
-          <!-- Üst Kısım: Sadece OPEN Rozeti (İkon Kaldırıldı) -->
-          <div class="relative z-10 flex justify-end items-start">
-            <span class="px-3 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase bg-emerald-950/90 border border-emerald-500/50 text-emerald-400 shadow-md backdrop-blur-md">
-              OPEN
-            </span>
-          </div>
-
-          <!-- Alt Kısım: Kart İçerik Metinleri -->
-          <div class="relative z-10 mt-12">
-            <h3 class="font-serif text-2xl text-white font-bold mb-2 drop-shadow">Delegation</h3>
-            <p class="text-slate-300 text-xs leading-relaxed mb-6 drop-shadow">
-              Delegation refers to a group application format. It allows participants to apply and take part in the event together as a team.
-            </p>
-
-            <!-- Tıklanınca Başvuru Penceresini Açan Buton -->
-            <button 
-              onclick="openApplyModal('Delegation')" 
-              class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-blue-400 hover:text-blue-300 transition-colors cursor-pointer group-hover:translate-x-1 duration-300"
-            >
-              <span>APPLY NOW</span>
-              <span>&rarr;</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- 2. KART: Delegate -->
-        <div class="relative min-h-[380px] rounded-2xl p-7 flex flex-col justify-between overflow-hidden border border-blue-500/30 shadow-2xl transition-all duration-300 hover:-translate-y-2 hover:border-blue-500/60 group">
-          
-          <!-- TÜM KARTIN ARKA PLAN FOTOĞRAFI ('delegate.jpg') -->
-          <img 
-            src="delegate.png" 
-            alt="Delegate Background" 
-            class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-            onerror="this.style.display='none';"
-          />
-          <div class="absolute inset-0 bg-gradient-to-t from-[#070d1e] via-[#070d1e]/85 to-[#070d1e]/40 group-hover:via-[#070d1e]/75 transition-colors"></div>
-
-          <!-- Üst Kısım: Sadece OPEN Rozeti (İkon Kaldırıldı) -->
-          <div class="relative z-10 flex justify-end items-start">
-            <span class="px-3 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase bg-emerald-950/90 border border-emerald-500/50 text-emerald-400 shadow-md backdrop-blur-md">
-              OPEN
-            </span>
-          </div>
-
-          <div class="relative z-10 mt-12">
-            <h3 class="font-serif text-2xl text-white font-bold mb-2 drop-shadow">Delegate</h3>
-            <p class="text-slate-300 text-xs leading-relaxed mb-6 drop-shadow">
-              Delegates represent their allocations and actively engage in debates. They present ideas and collaborate to develop effective solutions to given problems.
-            </p>
-
-            <button 
-              onclick="openApplyModal('Delegate')" 
-              class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-blue-400 hover:text-blue-300 transition-colors cursor-pointer group-hover:translate-x-1 duration-300"
-            >
-              <span>APPLY NOW</span>
-              <span>&rarr;</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- 3. KART: Press Member -->
-        <div class="relative min-h-[380px] rounded-2xl p-7 flex flex-col justify-between overflow-hidden border border-blue-500/30 shadow-2xl transition-all duration-300 hover:-translate-y-2 hover:border-blue-500/60 group">
-          
-          <!-- TÜM KARTIN ARKA PLAN FOTOĞRAFI ('press.jpg') -->
-          <img 
-            src="press.png" 
-            alt="Press Member Background" 
-            class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-            onerror="this.style.display='none';"
-          />
-          <div class="absolute inset-0 bg-gradient-to-t from-[#070d1e] via-[#070d1e]/85 to-[#070d1e]/40 group-hover:via-[#070d1e]/75 transition-colors"></div>
-
-          <!-- Üst Kısım: Sadece OPEN Rozeti (İkon Kaldırıldı) -->
-          <div class="relative z-10 flex justify-end items-start">
-            <span class="px-3 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase bg-emerald-950/90 border border-emerald-500/50 text-emerald-400 shadow-md backdrop-blur-md">
-              OPEN
-            </span>
-          </div>
-
-          <div class="relative z-10 mt-12">
-            <h3 class="font-serif text-2xl text-white font-bold mb-2 drop-shadow">Press Member</h3>
-            <p class="text-slate-300 text-xs leading-relaxed mb-6 drop-shadow">
-              The press team captures the most memorable moments of the event through photography, journalism, and social media coverage.
-            </p>
-
-            <button 
-              onclick="openApplyModal('Press Member')" 
-              class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-blue-400 hover:text-blue-300 transition-colors cursor-pointer group-hover:translate-x-1 duration-300"
-            >
-              <span>APPLY NOW</span>
-              <span>&rarr;</span>
-            </button>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-  </section>
-  <!-- ================= BÖLÜM 5: FOOTER ================= -->
-  <footer class="py-14 border-t border-blue-500/20 text-center relative bg-[#070d1e]">
-    <div class="max-w-4xl mx-auto px-6 flex flex-col items-center">
-      
-      <!-- Footer Logo -->
-      <div class="h-12 w-auto mb-4 flex items-center justify-center">
-        <img 
-          src="logo.png" 
-          alt="EVERMUN'26 Footer Logo" 
-          class="h-full w-auto object-contain max-h-12"
-          onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
-        />
-        <!-- Logo yoksa çıkan yedek ikon -->
-        <svg class="w-8 h-8 text-blue-400 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
-          <circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/>
-        </svg>
-      </div>
-
-      <!-- Etkinlik Başlığı -->
-      <h3 class="font-serif text-xl text-white font-bold tracking-wide mb-1">
-        EVERMUN<span class="text-blue-500">'26</span> — Model United Nations
-      </h3>
-      <p class="text-xs text-slate-300 mb-4">
-        Uşak's Premier Model United Nations Conference
-      </p>
-
-      <!-- Telif Hakkı -->
-      <p class="text-xs text-slate-400 mb-2">
-        © 2026 <span class="font-medium text-slate-200">EVERMUN'26</span>. All rights reserved.
-      </p>
-
-      <!-- İletişim E-postası -->
-      <p class="text-xs text-slate-300">
-        Contact us: 
-        <a href="mailto:evermun26@gmail.com" class="text-blue-400 hover:underline font-semibold">
-          evermun26@gmail.com
-        </a>
-      </p>
-
-    </div>
-  </footer>
-
-
-  <!-- ================= DETAYLI POP-UP BAŞVURU PENCERESİ ================= -->
-  <div id="applyModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
-    <div class="bright-navy-card rounded-3xl max-w-2xl w-full p-6 sm:p-8 relative shadow-2xl border border-blue-500/30 max-h-[90vh] overflow-y-auto">
-      
-      <!-- Kapatma Butonu -->
-      <button onclick="closeApplyModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white text-2xl transition-colors cursor-pointer">&times;</button>
-      
-      <!-- Modal Başlık -->
-      <h3 id="modalRoleTitle" class="font-serif text-2xl font-bold text-white mb-1">EVERMUN Delegate Application Form</h3>
-      <p class="text-xs text-blue-300 font-medium mb-6 pb-4 border-b border-blue-500/20">
-        IMPORTANT: Every delegate must complete the application form individually.
-      </p>
-
-      <!-- FORM -->
-      <form id="applyForm" onsubmit="handleApplySubmit(event)" class="space-y-5">
-        <input type="hidden" id="selectedRoleInput" value="" />
-
-        <!-- 1. AD & SOYAD -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label class="block text-[11px] text-slate-200 font-semibold mb-1 uppercase tracking-wider">First Name *</label>
-            <input type="text" id="firstName" required placeholder="First Name" class="w-full bg-[#0c1836] border border-blue-500/20 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500" />
-          </div>
-          <div>
-            <label class="block text-[11px] text-slate-200 font-semibold mb-1 uppercase tracking-wider">Last Name *</label>
-            <input type="text" id="lastName" required placeholder="Last Name" class="w-full bg-[#0c1836] border border-blue-500/20 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500" />
-          </div>
-        </div>
-
-        <!-- 2. CİNSİYET & DOĞUM TARİHİ -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label class="block text-[11px] text-slate-200 font-semibold mb-1 uppercase tracking-wider">Gender *</label>
-            <div class="flex items-center gap-6 pt-2">
-              <label class="inline-flex items-center gap-2 text-xs text-slate-200 cursor-pointer">
-                <input type="radio" name="gender" value="Male" required class="accent-blue-500" /> Male
-              </label>
-              <label class="inline-flex items-center gap-2 text-xs text-slate-200 cursor-pointer">
-                <input type="radio" name="gender" value="Female" required class="accent-blue-500" /> Female
-              </label>
-            </div>
-          </div>
-          <div>
-            <label class="block text-[11px] text-slate-200 font-semibold mb-1 uppercase tracking-wider">Date of Birth *</label>
-            <input type="date" id="dob" required class="w-full bg-[#0c1836] border border-blue-500/20 rounded-xl px-4 py-2 text-sm text-white focus:outline-none focus:border-blue-500" />
-          </div>
-        </div>
-
-        <!-- 3. ŞEHİR & OKUL -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label class="block text-[11px] text-slate-200 font-semibold mb-1 uppercase tracking-wider">City *</label>
-            <input type="text" id="city" required placeholder="City" class="w-full bg-[#0c1836] border border-blue-500/20 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500" />
-          </div>
-          <div>
-            <label class="block text-[11px] text-slate-200 font-semibold mb-1 uppercase tracking-wider">School and Grade *</label>
-            <input type="text" id="schoolGrade" required placeholder="School & Grade" class="w-full bg-[#0c1836] border border-blue-500/20 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500" />
-          </div>
-        </div>
-
-        <!-- 4. TELEFON & İLETİŞİM MAİLİ -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label class="block text-[11px] text-slate-200 font-semibold mb-1 uppercase tracking-wider">Phone Number *</label>
-            <input type="tel" id="phone" required placeholder="+90 5xx xxx xx xx" class="w-full bg-[#0c1836] border border-blue-500/20 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500" />
-          </div>
-          <div>
-            <label class="block text-[11px] text-slate-200 font-semibold mb-1 uppercase tracking-wider">Mail Address *</label>
-            <input type="email" id="email" required placeholder="example@gmail.com" class="w-full bg-[#0c1836] border border-blue-500/20 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500" />
-          </div>
-        </div>
-
-        <!-- 5. ÖNCEKİ DENEYİM -->
-        <div>
-          <label class="block text-[11px] text-slate-200 font-semibold mb-1 uppercase tracking-wider">Previous Experience *</label>
-          <textarea id="previousExp" required rows="2" placeholder="Example: EVERMUN'26 — UNODC — Germany — Honorable Mention" class="w-full bg-[#0c1836] border border-blue-500/20 rounded-xl px-4 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500"></textarea>
-        </div>
-
-        <!-- 6. KOMİTE SEÇİMLERİ (1, 2, 3) -->
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          <div>
-            <label class="block text-[10px] text-slate-200 font-semibold mb-1 uppercase tracking-wider">1st Committee *</label>
-            <select id="committee1" required class="w-full bg-[#0c1836] border border-blue-500/20 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500">
-              <option value="">Select...</option>
-              <option value="WHO">WHO</option>
-              <option value="UNODC">UNODC</option>
-              <option value="EUROPE UNION">EUROPE UNION</option>
-              <option value="ECOSOC">ECOSOC</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-[10px] text-slate-200 font-semibold mb-1 uppercase tracking-wider">2nd Committee *</label>
-            <select id="committee2" required class="w-full bg-[#0c1836] border border-blue-500/20 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500">
-              <option value="">Select...</option>
-              <option value="WHO">WHO</option>
-              <option value="UNODC">UNODC</option>
-              <option value="EUROPE UNION">EUROPE UNION</option>
-              <option value="ECOSOC">ECOSOC</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-[10px] text-slate-200 font-semibold mb-1 uppercase tracking-wider">3rd Committee *</label>
-            <select id="committee3" required class="w-full bg-[#0c1836] border border-blue-500/20 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500">
-              <option value="">Select...</option>
-              <option value="WHO">WHO</option>
-              <option value="UNODC">UNODC</option>
-              <option value="EUROPE UNION">EUROPE UNION</option>
-              <option value="ECOSOC">ECOSOC</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- 7. KONAKLAMA & PARTİ KATILIMI -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
-          <div>
-            <label class="block text-[11px] text-slate-200 font-semibold mb-1 uppercase tracking-wider">Require accommodation? *</label>
-            <div class="flex items-center gap-6 pt-1">
-              <label class="inline-flex items-center gap-2 text-xs text-slate-200 cursor-pointer"><input type="radio" name="accommodation" value="Yes" required class="accent-blue-500" /> Yes</label>
-              <label class="inline-flex items-center gap-2 text-xs text-slate-200 cursor-pointer"><input type="radio" name="accommodation" value="No" required class="accent-blue-500" /> No</label>
-            </div>
-          </div>
-          <div>
-            <label class="block text-[11px] text-slate-200 font-semibold mb-1 uppercase tracking-wider">Attend conference party? *</label>
-            <div class="flex items-center gap-6 pt-1">
-              <label class="inline-flex items-center gap-2 text-xs text-slate-200 cursor-pointer"><input type="radio" name="party" value="Yes" required class="accent-blue-500" /> Yes</label>
-              <label class="inline-flex items-center gap-2 text-xs text-slate-200 cursor-pointer"><input type="radio" name="party" value="No" required class="accent-blue-500" /> No</label>
-            </div>
-          </div>
-        </div>
-
-        <!-- 8. DİYET TERCİHİ -->
-        <div>
-          <label class="block text-[11px] text-slate-200 font-semibold mb-1 uppercase tracking-wider">Dietary preferences or restrictions? *</label>
-          <div class="flex flex-wrap items-center gap-4 pt-1">
-            <label class="inline-flex items-center gap-2 text-xs text-slate-200 cursor-pointer"><input type="radio" name="dietary" value="Vegan" required class="accent-blue-500" /> Vegan</label>
-            <label class="inline-flex items-center gap-2 text-xs text-slate-200 cursor-pointer"><input type="radio" name="dietary" value="Vegetarian" required class="accent-blue-500" /> Vegetarian</label>
-            <label class="inline-flex items-center gap-2 text-xs text-slate-200 cursor-pointer"><input type="radio" name="dietary" value="None" required class="accent-blue-500" /> None</label>
-          </div>
-        </div>
-
-        <!-- 9. SAĞLIK & ÖZEL İHTİYAÇLAR -->
-        <div>
-          <label class="block text-[11px] text-slate-200 font-semibold mb-1 uppercase tracking-wider">Health condition, allergy, or special needs? *</label>
-          <textarea id="healthNeeds" required rows="2" placeholder="Write 'None' if not applicable." class="w-full bg-[#0c1836] border border-blue-500/20 rounded-xl px-4 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500"></textarea>
-        </div>
-
-        <!-- 10. REFERANS BİLGİSİ -->
-        <div>
-          <label class="block text-[11px] text-slate-200 font-semibold mb-1 uppercase tracking-wider">Reference Information</label>
-          <input type="text" id="reference" placeholder="Reference Info (Optional)" class="w-full bg-[#0c1836] border border-blue-500/20 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500" />
-        </div>
-
-        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3.5 rounded-xl transition-colors mt-4 shadow-lg shadow-blue-600/30 cursor-pointer">
-          Submit Application
+    <!-- ================= POP-UP FORM MODAL ================= -->
+    <div
+      id="applyModal"
+      class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4"
+    >
+      <div
+        class="bright-navy-card rounded-3xl max-w-3xl w-full p-6 sm:p-8 relative shadow-2xl border border-blue-500/30 max-h-[90vh] overflow-y-auto"
+      >
+        <button
+          onclick="closeApplyModal()"
+          class="absolute top-5 right-5 text-slate-400 hover:text-white text-2xl transition-colors cursor-pointer"
+        >
+          &times;
         </button>
-      </form>
 
+        <h3
+          id="modalRoleTitle"
+          class="font-serif text-2xl font-bold text-white mb-1"
+        >
+          EVERMUN Application Form
+        </h3>
+        <p
+          id="modalSubtitle"
+          class="text-xs text-blue-300 font-medium mb-6 pb-4 border-b border-blue-500/20"
+        >
+          IMPORTANT: Enter the details below accurately.
+        </p>
+
+        <div
+          id="delegationOptions"
+          class="hidden mb-6 bg-[#0c1836] p-1.5 rounded-2xl border border-blue-500/30 grid grid-cols-2 gap-2"
+        >
+          <button
+            type="button"
+            onclick="selectSubRole('Head Delegate')"
+            id="btnHeadDelegate"
+            class="py-2.5 px-4 rounded-xl text-xs font-bold transition-all bg-blue-600 text-white shadow-lg"
+          >
+            Head Delegate
+          </button>
+          <button
+            type="button"
+            onclick="selectSubRole('Advisor Teacher')"
+            id="btnAdvisorTeacher"
+            class="py-2.5 px-4 rounded-xl text-xs font-bold transition-all text-slate-300 hover:text-white"
+          >
+            Advisor Teacher
+          </button>
+        </div>
+
+        <form
+          id="applyForm"
+          onsubmit="handleApplySubmit(event)"
+          class="space-y-6"
+        >
+          <input type="hidden" id="selectedRoleType" value="Delegate" />
+
+          <div
+            id="delegationNameContainer"
+            class="hidden bg-blue-950/40 p-4 rounded-2xl border border-blue-500/30"
+          >
+            <label
+              class="block text-[11px] text-slate-200 font-bold mb-1 uppercase tracking-wider"
+              >Delegation / Group Name (e.g. "Group A" or "Uşak High School")
+              *</label
+            >
+            <input
+              type="text"
+              id="delegationName"
+              placeholder="Enter Delegation Name (e.g. Group A)"
+              class="w-full bg-[#0c1836] border border-blue-500/30 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500"
+            />
+          </div>
+
+          <div id="membersContainer" class="space-y-6"></div>
+
+          <div id="addMemberBtnContainer" class="hidden pt-2">
+            <button
+              type="button"
+              onclick="addMemberCard()"
+              class="w-full py-3 rounded-xl bg-blue-950 border border-blue-500/40 text-blue-300 hover:bg-blue-900 hover:text-white font-semibold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer"
+            >
+              <span>+ Add Another Delegate / Group Member (Max 30)</span>
+            </button>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3.5 rounded-xl transition-colors mt-6 shadow-lg shadow-blue-600/30 cursor-pointer"
+          >
+            Submit Application
+          </button>
+        </form>
+      </div>
     </div>
-  </div>
 
+    <!-- ================= JAVASCRIPT LOGIC ================= -->
+    <script>
+      let memberCount = 0;
+      let cardIdCounter = 0;
+      const MAX_MEMBERS = 30;
 
-  <!-- ================= JAVASCRIPT LOGIC ================= -->
-  <script>
-    // 1. GERİ SAYIM SAYACI (2 EKİM 2026)
-    function startCountdown() {
-      const target = new Date("2026-10-02T09:00:00").getTime();
-      setInterval(() => {
-        const diff = target - new Date().getTime();
-        if (diff > 0) {
-          document.getElementById('days').innerText = String(Math.floor(diff / (1000 * 60 * 60 * 24))).padStart(2, '0');
-          document.getElementById('hours').innerText = String(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
-          document.getElementById('minutes').innerText = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+      // 1. GERİ SAYIM SAYACI
+      function startCountdown() {
+        const target = new Date("2026-10-02T09:00:00").getTime();
+        setInterval(() => {
+          const diff = target - new Date().getTime();
+          if (diff > 0) {
+            document.getElementById("days").innerText = String(
+              Math.floor(diff / (1000 * 60 * 60 * 24)),
+            ).padStart(2, "0");
+            document.getElementById("hours").innerText = String(
+              Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+            ).padStart(2, "0");
+            document.getElementById("minutes").innerText = String(
+              Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)),
+            ).padStart(2, "0");
+          }
+        }, 1000);
+      }
+
+      // 2. MODAL AÇMA
+      function openApplyModal(roleCategory) {
+        const modal = document.getElementById("applyModal");
+        const delegationOpts = document.getElementById("delegationOptions");
+        const delegationNameContainer = document.getElementById(
+          "delegationNameContainer",
+        );
+        const addMemberBtnContainer = document.getElementById(
+          "addMemberBtnContainer",
+        );
+        const modalSubtitle = document.getElementById("modalSubtitle");
+
+        document.getElementById("membersContainer").innerHTML = "";
+        memberCount = 0;
+        cardIdCounter = 0;
+
+        if (roleCategory === "Delegation") {
+          delegationOpts.classList.remove("hidden");
+          delegationNameContainer.classList.remove("hidden");
+          addMemberBtnContainer.classList.remove("hidden");
+          modalSubtitle.innerText =
+            "IMPORTANT: Select Head Delegate or Advisor Teacher and enter delegation details below.";
+          selectSubRole("Head Delegate");
+        } else {
+          delegationOpts.classList.add("hidden");
+          delegationNameContainer.classList.add("hidden");
+          addMemberBtnContainer.classList.add("hidden");
+          modalSubtitle.innerText =
+            "IMPORTANT: Please fill in your personal application details accurately.";
+          setupRoleFields(roleCategory);
         }
-      }, 1000);
-    }
 
-    // 2. MODAL AÇMA/KAPATMA
-    function openApplyModal(roleName) {
-      document.getElementById('modalRoleTitle').innerText = "EVERMUN " + roleName + " Application Form";
-      document.getElementById('selectedRoleInput').value = roleName;
-      document.getElementById('applyModal').classList.remove('hidden');
-    }
+        modal.classList.remove("hidden");
+        document.body.classList.add("overflow-hidden");
+      }
 
-    function closeApplyModal() {
-      document.getElementById('applyModal').classList.add('hidden');
-    }
+      function selectSubRole(subRole) {
+        const btnHead = document.getElementById("btnHeadDelegate");
+        const btnAdvisor = document.getElementById("btnAdvisorTeacher");
 
-    // 3. DETAYLI FORM VERİLERİNİ GOOGLE SHEETS'E GÖNDERME
-    async function handleApplySubmit(e) {
-      e.preventDefault();
-      const form = e.target;
-      const submitBtn = form.querySelector('button[type="submit"]');
+        if (subRole === "Head Delegate") {
+          btnHead.className =
+            "py-2.5 px-4 rounded-xl text-xs font-bold transition-all bg-blue-600 text-white shadow-lg";
+          btnAdvisor.className =
+            "py-2.5 px-4 rounded-xl text-xs font-bold transition-all text-slate-300 hover:text-white";
+        } else {
+          btnAdvisor.className =
+            "py-2.5 px-4 rounded-xl text-xs font-bold transition-all bg-blue-600 text-white shadow-lg";
+          btnHead.className =
+            "py-2.5 px-4 rounded-xl text-xs font-bold transition-all text-slate-300 hover:text-white";
+        }
 
-      const role = document.getElementById('selectedRoleInput').value;
+        document.getElementById("membersContainer").innerHTML = "";
+        memberCount = 0;
+        cardIdCounter = 0;
+        setupRoleFields(subRole);
+      }
 
-      // Tüm 17 Alanın Verilerini Alma
-      const formData = {
-        role: role,
-        firstName: document.getElementById('firstName').value,
-        lastName: document.getElementById('lastName').value,
-        gender: form.querySelector('input[name="gender"]:checked')?.value || '',
-        dob: document.getElementById('dob').value,
-        city: document.getElementById('city').value,
-        schoolGrade: document.getElementById('schoolGrade').value,
-        phone: document.getElementById('phone').value,
-        email: document.getElementById('email').value,
-        previousExp: document.getElementById('previousExp').value,
-        committee1: document.getElementById('committee1').value,
-        committee2: document.getElementById('committee2').value,
-        committee3: document.getElementById('committee3').value,
-        accommodation: form.querySelector('input[name="accommodation"]:checked')?.value || '',
-        party: form.querySelector('input[name="party"]:checked')?.value || '',
-        dietary: form.querySelector('input[name="dietary"]:checked')?.value || '',
-        healthNeeds: document.getElementById('healthNeeds').value,
-        reference: document.getElementById('reference').value
-      };
+      function setupRoleFields(roleType) {
+        document.getElementById("selectedRoleType").value = roleType;
+        document.getElementById("modalRoleTitle").innerText =
+          "EVERMUN " + roleType + " Application Form";
+        addMemberCard();
+      }
 
-      submitBtn.innerText = "Submitting...";
-      submitBtn.disabled = true;
+      // 3. DİNAMİK DELEGE KARTI EKLEME
+      function addMemberCard() {
+        if (memberCount >= MAX_MEMBERS) {
+          alert("Maximum 30 members allowed per delegation.");
+          return;
+        }
 
-      // Google Apps Script Web App URL Adresiniz:
-      const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyfRKTkcBmUgf-iTzlUK10vZIdC7bxjydsTrCFZdzIcb7KmvFeQhGQ9rVtK24lR9tdzxQ/exec";
+        memberCount++;
+        cardIdCounter++;
+        const uniqueId = cardIdCounter;
+        const roleType = document.getElementById("selectedRoleType").value;
+        const isAdvisor = roleType === "Advisor Teacher" && memberCount === 1;
+        const isPress = roleType === "Press Member";
 
-      try {
-        await fetch(GOOGLE_SCRIPT_URL, {
-          method: "POST",
-          mode: "no-cors",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData)
+        const container = document.getElementById("membersContainer");
+        const cardId = `member_card_${uniqueId}`;
+
+        const cardHTML = `
+        <div id="${cardId}" class="bg-[#0c1836] p-5 rounded-2xl border border-blue-500/25 relative space-y-4">
+          <div class="flex items-center justify-between pb-3 border-b border-blue-500/20">
+            <span class="text-xs font-bold text-blue-400 uppercase tracking-wider">
+              ${isAdvisor ? "Advisor / Teacher Info" : memberCount === 1 ? "Primary Applicant / Member #1" : "Group Member / Delegate #" + memberCount}
+            </span>
+            ${memberCount > 1 ? `<button type="button" onclick="removeMemberCard('${cardId}')" class="text-xs text-red-400 hover:underline">Remove Member</button>` : ""}
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[10px] text-slate-300 font-semibold mb-1 uppercase">First Name *</label>
+              <input type="text" class="m-firstName w-full bg-[#050f26] border border-blue-500/20 rounded-xl px-3.5 py-2 text-xs text-white" required placeholder="First Name" />
+            </div>
+            <div>
+              <label class="block text-[10px] text-slate-300 font-semibold mb-1 uppercase">Last Name *</label>
+              <input type="text" class="m-lastName w-full bg-[#050f26] border border-blue-500/20 rounded-xl px-3.5 py-2 text-xs text-white" required placeholder="Last Name" />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[10px] text-slate-300 font-semibold mb-1 uppercase">Gender *</label>
+              <div class="flex items-center gap-4 pt-1">
+                <label class="inline-flex items-center gap-1.5 text-xs text-slate-200"><input type="radio" name="gender_${uniqueId}" value="Male" checked class="accent-blue-500" /> Male</label>
+                <label class="inline-flex items-center gap-1.5 text-xs text-slate-200"><input type="radio" name="gender_${uniqueId}" value="Female" class="accent-blue-500" /> Female</label>
+              </div>
+            </div>
+            <div>
+              <label class="block text-[10px] text-slate-300 font-semibold mb-1 uppercase">Date of Birth *</label>
+              <input type="date" class="m-dob w-full bg-[#050f26] border border-blue-500/20 rounded-xl px-3.5 py-2 text-xs text-white" required />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[10px] text-slate-300 font-semibold mb-1 uppercase">City *</label>
+              <input type="text" class="m-city w-full bg-[#050f26] border border-blue-500/20 rounded-xl px-3.5 py-2 text-xs text-white" required placeholder="City" />
+            </div>
+            <div>
+              <label class="block text-[10px] text-slate-300 font-semibold mb-1 uppercase">${isAdvisor ? "Name of Institution *" : roleType === "Head Delegate" ? "School *" : "School and Grade *"}</label>
+              <input type="text" class="m-schoolGrade w-full bg-[#050f26] border border-blue-500/20 rounded-xl px-3.5 py-2 text-xs text-white" required placeholder="${isAdvisor ? "Institution Name" : "School & Grade"}" />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[10px] text-slate-300 font-semibold mb-1 uppercase">Phone Number *</label>
+              <input type="tel" class="m-phone w-full bg-[#050f26] border border-blue-500/20 rounded-xl px-3.5 py-2 text-xs text-white" required placeholder="+90 5xx xxx xx xx" />
+            </div>
+            <div>
+              <label class="block text-[10px] text-slate-300 font-semibold mb-1 uppercase">Mail Address *</label>
+              <input type="email" class="m-email w-full bg-[#050f26] border border-blue-500/20 rounded-xl px-3.5 py-2 text-xs text-white" required placeholder="example@gmail.com" />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-[10px] text-slate-300 font-semibold mb-1 uppercase">${isPress ? "Previous Experience as a Press Member *" : "Previous Experience *"}</label>
+            <textarea class="m-previousExp w-full bg-[#050f26] border border-blue-500/20 rounded-xl px-3.5 py-1.5 text-xs text-white" required rows="2" placeholder="Experience details..."></textarea>
+          </div>
+
+          ${
+            !isAdvisor
+              ? `
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+            <div>
+              <label class="block text-[9px] text-slate-300 font-semibold mb-1 uppercase">1st Committee *</label>
+              <select class="m-c1 w-full bg-[#050f26] border border-blue-500/20 rounded-xl px-2.5 py-1.5 text-xs text-white" required>
+                <option value="">Select...</option><option value="WHO">WHO</option><option value="UNODC">UNODC</option><option value="EUROPE UNION">EUROPE UNION</option><option value="ECOSOC">ECOSOC</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-[9px] text-slate-300 font-semibold mb-1 uppercase">2nd Committee *</label>
+              <select class="m-c2 w-full bg-[#050f26] border border-blue-500/20 rounded-xl px-2.5 py-1.5 text-xs text-white" required>
+                <option value="">Select...</option><option value="WHO">WHO</option><option value="UNODC">UNODC</option><option value="EUROPE UNION">EUROPE UNION</option><option value="ECOSOC">ECOSOC</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-[9px] text-slate-300 font-semibold mb-1 uppercase">3rd Committee *</label>
+              <select class="m-c3 w-full bg-[#050f26] border border-blue-500/20 rounded-xl px-2.5 py-1.5 text-xs text-white" required>
+                <option value="">Select...</option><option value="WHO">WHO</option><option value="UNODC">UNODC</option><option value="EUROPE UNION">EUROPE UNION</option><option value="ECOSOC">ECOSOC</option>
+              </select>
+            </div>
+          </div>
+          `
+              : ""
+          }
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[10px] text-slate-300 font-semibold mb-1 uppercase">Require accommodation? *</label>
+              <div class="flex items-center gap-4 pt-1">
+                <label class="inline-flex items-center gap-1.5 text-xs text-slate-200"><input type="radio" name="accommodation_${uniqueId}" value="Yes" class="accent-blue-500" /> Yes</label>
+                <label class="inline-flex items-center gap-1.5 text-xs text-slate-200"><input type="radio" name="accommodation_${uniqueId}" value="No" checked class="accent-blue-500" /> No</label>
+              </div>
+            </div>
+            ${
+              !isAdvisor
+                ? `
+            <div>
+              <label class="block text-[10px] text-slate-300 font-semibold mb-1 uppercase">Attend conference party? *</label>
+              <div class="flex items-center gap-4 pt-1">
+                <label class="inline-flex items-center gap-1.5 text-xs text-slate-200"><input type="radio" name="party_${uniqueId}" value="Yes" checked class="accent-blue-500" /> Yes</label>
+                <label class="inline-flex items-center gap-1.5 text-xs text-slate-200"><input type="radio" name="party_${uniqueId}" value="No" class="accent-blue-500" /> No</label>
+              </div>
+            </div>
+            `
+                : ""
+            }
+          </div>
+
+          <div>
+            <label class="block text-[10px] text-slate-300 font-semibold mb-1 uppercase">Dietary preferences? *</label>
+            <div class="flex flex-wrap items-center gap-3 pt-1">
+              <label class="inline-flex items-center gap-1.5 text-xs text-slate-200"><input type="radio" name="dietary_${uniqueId}" value="Vegan" class="accent-blue-500" /> Vegan</label>
+              <label class="inline-flex items-center gap-1.5 text-xs text-slate-200"><input type="radio" name="dietary_${uniqueId}" value="Vegetarian" class="accent-blue-500" /> Vegetarian</label>
+              <label class="inline-flex items-center gap-1.5 text-xs text-slate-200"><input type="radio" name="dietary_${uniqueId}" value="None" checked class="accent-blue-500" /> None</label>
+              <label class="inline-flex items-center gap-1.5 text-xs text-slate-200"><input type="radio" name="dietary_${uniqueId}" value="Other" class="accent-blue-500" /> Other</label>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[10px] text-slate-300 font-semibold mb-1 uppercase">Health / Special Needs *</label>
+              <input type="text" class="m-healthNeeds w-full bg-[#050f26] border border-blue-500/20 rounded-xl px-3.5 py-2 text-xs text-white" required placeholder="None if N/A" />
+            </div>
+            <div>
+              <label class="block text-[10px] text-slate-300 font-semibold mb-1 uppercase">Reference Info</label>
+              <input type="text" class="m-reference w-full bg-[#050f26] border border-blue-500/20 rounded-xl px-3.5 py-2 text-xs text-white" placeholder="Optional" />
+            </div>
+          </div>
+        </div>
+      `;
+
+        container.insertAdjacentHTML("beforeend", cardHTML);
+      }
+
+      function removeMemberCard(cardId) {
+        const card = document.getElementById(cardId);
+        if (card) {
+          card.remove();
+          memberCount--;
+        }
+      }
+
+      function closeApplyModal() {
+        document.getElementById("applyModal").classList.add("hidden");
+        document.body.classList.remove("overflow-hidden");
+      }
+
+      async function handleApplySubmit(e) {
+        e.preventDefault();
+        const form = e.target;
+        const submitBtn = form.querySelector('button[type="submit"]');
+
+        const roleType =
+          document.getElementById("selectedRoleType")?.value || "Delegate";
+        const delegationName =
+          document.getElementById("delegationName")?.value || "Individual";
+
+        const getVal = (parent, selector) => {
+          const el = parent.querySelector(selector);
+          return el ? el.value : "-";
+        };
+
+        // Radyo buton gruplarını karta özel önek (prefix) üzerinden dinamik sorgular
+        const getRadioVal = (parent, prefix, fallback) => {
+          const el = parent.querySelector(`input[name^="${prefix}_"]:checked`);
+          return el ? el.value : fallback;
+        };
+
+        const memberCards = document.querySelectorAll(
+          "#membersContainer > div",
+        );
+        const members = [];
+        let hasError = false;
+
+        memberCards.forEach((card, idx) => {
+          const c1 = getVal(card, ".m-c1");
+          const c2 = getVal(card, ".m-c2");
+          const c3 = getVal(card, ".m-c3");
+
+          // Komite çakışma kontrolü (Advisor değilse)
+          if (
+            roleType !== "Advisor Teacher" &&
+            c1 !== "-" &&
+            c2 !== "-" &&
+            c3 !== "-"
+          ) {
+            if (c1 === c2 || c1 === c3 || c2 === c3) {
+              alert(
+                `Member #${idx + 1}: Please select 3 different committees.`,
+              );
+              hasError = true;
+              return;
+            }
+          }
+
+          members.push({
+            firstName: getVal(card, ".m-firstName"),
+            lastName: getVal(card, ".m-lastName"),
+            gender: getRadioVal(card, "gender", "Male"),
+            dob: getVal(card, ".m-dob"),
+            city: getVal(card, ".m-city"),
+            schoolGrade: getVal(card, ".m-schoolGrade"),
+            phone: getVal(card, ".m-phone"),
+            email: getVal(card, ".m-email"),
+            previousExp: getVal(card, ".m-previousExp"),
+            committee1: c1,
+            committee2: c2,
+            committee3: c3,
+            accommodation: getRadioVal(card, "accommodation", "No"),
+            party: getRadioVal(card, "party", "No"),
+            dietary: getRadioVal(card, "dietary", "None"),
+            healthNeeds: getVal(card, ".m-healthNeeds"),
+            reference: getVal(card, ".m-reference"),
+          });
         });
 
-        alert("Application submitted successfully!");
-        form.reset();
-        closeApplyModal();
-      } catch (err) {
-        alert("Submission failed. Please try again.");
-      } finally {
-        submitBtn.innerText = "Submit Application";
-        submitBtn.disabled = false;
-      }
-    }
+        if (hasError) return;
 
-    document.addEventListener("DOMContentLoaded", startCountdown);
-  </script>
+        const payload = {
+          roleType: roleType,
+          delegationName: delegationName,
+          members: members,
+        };
+
+        submitBtn.innerText = "Submitting " + members.length + " Member(s)...";
+        submitBtn.disabled = true;
+
+        const GOOGLE_SCRIPT_URL =
+          "https://script.google.com/macros/s/AKfycbwLuuptXgfL8a0wKuT46dt1-s39ZT3LUp8cXNzax9EI4DVzZu8kKcD5If8R-jc0e-G2pg/exec";
+
+        try {
+          await fetch(GOOGLE_SCRIPT_URL, {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+
+          alert(
+            "Application submitted successfully for " +
+              members.length +
+              " member(s)!",
+          );
+          form.reset();
+          closeApplyModal();
+        } catch (err) {
+          alert("Submission failed. Please try again.");
+        } finally {
+          submitBtn.innerText = "Submit Application";
+          submitBtn.disabled = false;
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", startCountdown);
+
+      // ESC tuşuna basıldığında modalı kapat
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+          closeApplyModal();
+        }
+      });
+    </script>
+  </body>
+</html>
